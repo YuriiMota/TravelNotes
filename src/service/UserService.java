@@ -23,44 +23,75 @@ public class UserService implements UserDAO {
                 users.add(user);
             }
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            ex.printStackTrace();
         }
         return users;
     }
 
     @Override
     public User getById(int id) {
-        User user =null;
-        try(Connection connection = ConnectionDB.getConnection()){
-            String sql="SELECT * FROM users WHERE id=?";
-            try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-                preparedStatement.setInt(1,id);
+        User user = null;
+        try (Connection connection = ConnectionDB.getConnection()) {
+            String sql = "SELECT * FROM users WHERE id=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                while(resultSet.next()){
+                while (resultSet.next()) {
                     int userId = resultSet.getInt(1);
                     String firstname = resultSet.getString(2);
                     String lastname = resultSet.getString(3);
-                    user=new User(userId,firstname,lastname);
+                    user = new User(userId, firstname, lastname);
                 }
             }
-        }catch (SQLException ex){
-            ex.getStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return user;
     }
 
     @Override
     public int insert(User user) {
+        try (Connection connection = ConnectionDB.getConnection()) {
+            String sql = "INSERT INTO users (firstname, lastname) values (?,?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, user.getFirstname());
+                preparedStatement.setString(2, user.getLastname());
+                return preparedStatement.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int update(User user) {
+        String sql = "UPDATE users SET firstname=?, lastname=? WHERE id =?";
+        try(Connection connection = ConnectionDB.getConnection()){
+            try(PreparedStatement preparedStatement=connection.prepareStatement(sql)){
+                preparedStatement.setString(1,user.getFirstname());
+                preparedStatement.setString(2,user.getLastname());
+                preparedStatement.setInt(3,user.getId());
+
+                return preparedStatement.executeUpdate();
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int delete(int id) {
+        try (Connection conn = ConnectionDB.getConnection()) {
+            String sql = "DELETE FROM users WHERE id = ?";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                return preparedStatement.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 }

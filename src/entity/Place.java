@@ -7,15 +7,24 @@ public class Place {
     private String title;
     private String country;
     private String description;
+    private String image;
 
     public Place() {
     }
 
-    public Place(int id, String title, String country, String description) {
+    public Place(String title, String country, String description, String image) {
+        this.title = title;
+        this.country = country;
+        this.description = description;
+        this.image = image;
+    }
+
+    public Place(int id, String title, String country, String description, String image) {
         this.id = id;
         this.title = title;
         this.country = country;
         this.description = description;
+        this.image = image;
     }
 
     public int getId() {
@@ -50,6 +59,14 @@ public class Place {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,21 +75,23 @@ public class Place {
         return id == place.id &&
                 Objects.equals(title, place.title) &&
                 Objects.equals(country, place.country) &&
-                Objects.equals(description, place.description);
+                Objects.equals(description, place.description) &&
+                Objects.equals(image, place.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, country, description);
+        return Objects.hash(id, title, country, description, image);
     }
 
     @Override
     public String toString() {
-        return "PlaceDAO{" +
+        return "Place{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", country='" + country + '\'' +
                 ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

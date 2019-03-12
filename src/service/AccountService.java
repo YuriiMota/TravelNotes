@@ -14,7 +14,6 @@ public class AccountService implements AccountDAO {
     public List<Account> getAll() {
         List<Account> accounts = new ArrayList<>();
 
-
         try (Connection conn = ConnectionDB.getConnection()) {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM accounts");
@@ -26,7 +25,7 @@ public class AccountService implements AccountDAO {
                 accounts.add(account);
             }
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            ex.printStackTrace();
         }
         return accounts;
     }
@@ -48,7 +47,7 @@ public class AccountService implements AccountDAO {
                 }
             }
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            ex.printStackTrace();
         }
         return account;
     }
@@ -64,7 +63,7 @@ public class AccountService implements AccountDAO {
                 return preparedStatement.executeUpdate();
             }
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            ex.printStackTrace();
         }
         return 0;
     }
@@ -82,7 +81,7 @@ public class AccountService implements AccountDAO {
                 return preparedStatement.executeUpdate();
             }
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            ex.printStackTrace();
         }
         return 0;
     }
@@ -97,7 +96,7 @@ public class AccountService implements AccountDAO {
                 return preparedStatement.executeUpdate();
             }
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            ex.printStackTrace();
         }
         return 0;
     }
