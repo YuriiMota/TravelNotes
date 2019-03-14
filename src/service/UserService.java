@@ -50,12 +50,13 @@ public class UserService implements UserDAO {
     }
 
     @Override
-    public int insert(User user) {
+    public int insert(User user, int id) {
         try (Connection connection = ConnectionDB.getConnection()) {
-            String sql = "INSERT INTO users (firstname, lastname) values (?,?)";
+            String sql = "INSERT INTO users (firstname, lastname, accounts_id) values (?,?,?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, user.getFirstname());
                 preparedStatement.setString(2, user.getLastname());
+                preparedStatement.setInt(3,id);
                 return preparedStatement.executeUpdate();
             }
         } catch (SQLException ex) {

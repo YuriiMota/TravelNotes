@@ -52,6 +52,7 @@ public class AccountService implements AccountDAO {
         return account;
     }
 
+
     @Override
     public int insert(Account account) {
 
@@ -99,6 +100,54 @@ public class AccountService implements AccountDAO {
             ex.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Account getByLogin(String login) {
+        Account account = null;
+        try (Connection conn = ConnectionDB.getConnection()) {
+
+            String sql = "SELECT * FROM accounts WHERE email=?";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, login);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    int accountId = resultSet.getInt(1);
+                    String email = resultSet.getString(2);
+                    String password = resultSet.getString(3);
+                    account = new Account(accountId, email, password);
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return account;
+    }
+    @Override
+    public Account getByLogin(String login, String pass) {
+        Account account = null;
+        try (Connection conn = ConnectionDB.getConnection()) {
+
+            String sql = "SELECT * FROM accounts WHERE email=? AND password=?";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, login);
+                preparedStatement.setString(2, pass);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    int accountId = resultSet.getInt(1);
+                    String email = resultSet.getString(2);
+                    String password = resultSet.getString(3);
+                    account = new Account(accountId, email, password);
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return account;
     }
 
 }

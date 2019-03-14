@@ -18,7 +18,7 @@ public class ConnectionDB {
         } catch (ClassNotFoundException e) {
             e.getStackTrace();
         }
-        try (InputStream in = Files.newInputStream(Paths.get("database.properties"))) {
+        try (InputStream in = Files.newInputStream(Paths.get("G:\\SoftServe\\Homework\\TravelNotes\\database.properties"))) {
             props.load(in);
         } catch (IOException e) {
             System.out.println("Configuration database file not found");

@@ -17,4 +17,7 @@ public interface AccountDAO {
     int update(Account account);
 
     int delete(int id);
+
+    Account getByLogin(String login);
+    Account getByLogin(String login, String password);
 }

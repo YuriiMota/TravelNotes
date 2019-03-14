@@ -9,7 +9,7 @@ public interface UserDAO {
 
     User getById(int id);
 
-    int insert(User user);
+    int insert(User user, int accountId);
 
     int update(User user);
 
