@@ -27,6 +27,12 @@ public class Place {
         this.image = image;
     }
 
+    public Place(String title, String country, String description) {
+        this.title = title;
+        this.country = country;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }

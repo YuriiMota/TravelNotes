@@ -125,6 +125,7 @@ public class AccountService implements AccountDAO {
         }
         return account;
     }
+
     @Override
     public Account getByLogin(String login, String pass) {
         Account account = null;

@@ -1,5 +1,6 @@
 package controller;
 
+import connection.Md5Apache;
 import dao.AccountDAO;
 import dao.UserDAO;
 import entity.Account;
@@ -29,11 +30,12 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-
+        Md5Apache md5Apache = new Md5Apache();
         try {
             String email = req.getParameter("email");
             String psw = req.getParameter("psw");
+            email=md5Apache.encryptText(email);
+            psw=md5Apache.encryptText(psw);
             if (availableLogin(email)) {
                 Account account = new Account(email, psw);
                 accountDAO.insert(account);

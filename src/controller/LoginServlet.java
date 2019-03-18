@@ -1,7 +1,8 @@
 package controller;
 
+import connection.Md5Apache;
 import dao.AccountDAO;
-import entity.Account;
+
 import service.AccountService;
 
 import javax.servlet.RequestDispatcher;
@@ -18,9 +19,12 @@ public class LoginServlet extends HttpServlet {
     private AccountDAO accountDAO = new AccountService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Md5Apache md5Apache = new Md5Apache();
         try {
             String email = request.getParameter("email");
             String psw = request.getParameter("psw");
+            email = md5Apache.encryptText(email);
+            psw=md5Apache.encryptText(psw);
             if (registeredLogin(email, psw)) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("id", accountDAO.getByLogin(email, psw));

@@ -54,8 +54,8 @@ public class UserService implements UserDAO {
         try (Connection connection = ConnectionDB.getConnection()) {
             String sql = "INSERT INTO users (firstname, lastname, accounts_id) values (?,?,?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, user.getFirstname());
-                preparedStatement.setString(2, user.getLastname());
+                preparedStatement.setString(1, user.getFirstName());
+                preparedStatement.setString(2, user.getLastName());
                 preparedStatement.setInt(3,id);
                 return preparedStatement.executeUpdate();
             }
@@ -70,8 +70,8 @@ public class UserService implements UserDAO {
         String sql = "UPDATE users SET firstname=?, lastname=? WHERE id =?";
         try(Connection connection = ConnectionDB.getConnection()){
             try(PreparedStatement preparedStatement=connection.prepareStatement(sql)){
-                preparedStatement.setString(1,user.getFirstname());
-                preparedStatement.setString(2,user.getLastname());
+                preparedStatement.setString(1,user.getFirstName());
+                preparedStatement.setString(2,user.getLastName());
                 preparedStatement.setInt(3,user.getId());
 
                 return preparedStatement.executeUpdate();
