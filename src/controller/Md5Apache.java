@@ -1,4 +1,4 @@
-package connection;
+package controller;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

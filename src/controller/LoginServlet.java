@@ -1,6 +1,5 @@
 package controller;
 
-import connection.Md5Apache;
 import dao.AccountDAO;
 
 import service.AccountService;
@@ -22,8 +21,8 @@ public class LoginServlet extends HttpServlet {
         Md5Apache md5Apache = new Md5Apache();
         try {
             String email = request.getParameter("email");
-            String psw = request.getParameter("psw");
-            email = md5Apache.encryptText(email);
+            String psw = request.getParameter("password");
+
             psw=md5Apache.encryptText(psw);
             if (registeredLogin(email, psw)) {
                 HttpSession httpSession = request.getSession();
