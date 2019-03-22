@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +47,7 @@
                         new Story</a></li>
                 </ul>
                 <p class="navbar-text navbar-right actions"><a class="btn btn-default action-button" role="button"
-                                                               href="#">Log out</a></p>
+                                                               href="/logOff">Log out</a></p>
             </div>
         </div>
     </nav>
@@ -55,16 +56,19 @@
     <div class="container">
 
         <div class="row projects">
+            <div class="col-sm-12">
             <c:forEach var="place" items="${places}">
                 <div class="col-sm-6 item">
 
                     <div class="row">
 
-                        <div class="col-md-5"><a href="<c:url value="/view?id=${place.getId()}" />"><img
+                        <div class="col-md-5"><a href="<c:url value="/view?id=${place.getId()}" />">
+                            <img
                                 class="img-responsive" src="${place.getImage()}"></a></div>
                         <div class="col-md-7">
                             <h3 class="name"><c:out value="${place.getTitle()}"/></h3>
-                            <p class="description"><c:out value="${place.getDescription()}"/></p>
+
+                            <p class="description"><c:out value="${fn:substring(place.getDescription(),0,100)}"/></p>
                         </div>
 
                     </div>
@@ -73,7 +77,7 @@
 
             </c:forEach>
 
-
+            </div>
         </div>
 
 

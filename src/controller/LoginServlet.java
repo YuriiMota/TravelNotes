@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("id", accountDAO.getByLogin(email, psw));
 
-                response.sendRedirect(request.getContextPath() + "/mynotes");
+                response.sendRedirect("/mynotes");
             } else {
                 response.sendRedirect(request.getContextPath() + "/login");
             }

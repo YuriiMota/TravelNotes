@@ -3438,8 +3438,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-default {
     color: #555555;
-    background-color: #eeeeee;
-    border-color: #e2e2e2
+    background-color: #555555;
+    border-color: #555555
 }
 
 .btn-default:focus, .btn-default.focus {
@@ -4863,11 +4863,14 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
         float: left !important
     }
 
+    .navbar-centre {
+        float: top !important;
+        margin-right: -15px
+    }
     .navbar-right {
         float: right !important;
         margin-right: -15px
     }
-
     .navbar-right ~ .navbar-right {
         margin-right: 0
     }

@@ -20,6 +20,7 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     private AccountDAO accountDAO = new AccountService();
     private UserDAO userDAO = new UserService();
+    private static final int MAX_PASSS_LENGTH = 9;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,21 +34,24 @@ public class RegistrationServlet extends HttpServlet {
         try {
             String email = req.getParameter("email");
             String psw = req.getParameter("password");
-
-            psw=md5Apache.encryptText(psw);
-            if (availableLogin(email)) {
-                Account account = new Account(email, psw);
-                accountDAO.insert(account);
-                userDAO.insert(new User("Unknown","Person"),accountDAO.getByLogin(email).getId());
-                resp.sendRedirect(req.getContextPath() + "/login");
+            if (checkValidations(email, psw)) {
+                psw = md5Apache.encryptText(psw);
+                if (availableLogin(email)) {
+                    Account account = new Account(email, psw);
+                    accountDAO.insert(account);
+                    userDAO.insert(new User("Unknown", "Person"), accountDAO.getByLogin(email).getId());
+                    resp.sendRedirect(req.getContextPath() + "/login");
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/registration");
+                }
             } else {
                 resp.sendRedirect(req.getContextPath() + "/registration");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
+
 
     private boolean availableLogin(String login) {
         boolean isAvailable = false;
@@ -56,5 +60,15 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             return isAvailable;
         }
+    }
+
+    private boolean checkValidations(String email, String password) {
+        boolean iSValid = false;
+        if ((email.length() < MAX_PASSS_LENGTH) && (password.length() < MAX_PASSS_LENGTH)) ;
+        {
+            iSValid = true;
+
+        }
+        return iSValid;
     }
 }

@@ -15,6 +15,8 @@ import java.io.IOException;
 
 @WebServlet("/editname")
 public class EditNameServlet extends HttpServlet {
+    HttpSession httpSession;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDAO userDAO = new UserService();
         User user;
@@ -24,13 +26,12 @@ public class EditNameServlet extends HttpServlet {
             String firstName = request.getParameter("fname");
             String lastName = request.getParameter("lname");
 
-            user=new User(id,firstName,lastName);
+            user = new User(id, firstName, lastName);
 
             userDAO.update(user);
-            response.sendRedirect(request.getContextPath()+"/mynotes");
+            response.sendRedirect(request.getContextPath() + "/mynotes");
 
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
 
             getServletContext().getRequestDispatcher("/editname.jsp").forward(request, response);
         }
@@ -38,13 +39,18 @@ public class EditNameServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDAO userDAO = new UserService();
-        User user;
-        HttpSession httpSession=request.getSession();
-        Account account = (Account)httpSession.getAttribute("id");
-        user = userDAO.getById(account.getId());
+        httpSession = request.getSession();
+        if (httpSession.getAttribute("id") == null) {
+            response.sendRedirect("/login");
+        } else {
+            UserDAO userDAO = new UserService();
+            User user;
+            httpSession = request.getSession();
+            Account account = (Account) httpSession.getAttribute("id");
+            user = userDAO.getById(account.getId());
 
-        request.setAttribute("user", user);
-        getServletContext().getRequestDispatcher("/editname.jsp").forward(request, response);
+            request.setAttribute("user", user);
+            getServletContext().getRequestDispatcher("/editname.jsp").forward(request, response);
+        }
     }
 }

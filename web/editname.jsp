@@ -25,14 +25,14 @@
         <div class="header-dark" style="height: 630px;">
             <nav class="navbar navbar-default navigation-clean-search" style="height: 24px;">
                 <div class="container">
-                    <div class="navbar-header"><a class="navbar-brand" href="#">Your Travel Stories</a><button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
+                    <div class="navbar-header"><a class="navbar-brand" href="/mynotes">Your Travel Stories</a><button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
                     <div
                         class="collapse navbar-collapse" id="navcol-1">
                         <form class="navbar-form navbar-left" target="_self">
                             <div class="form-group"><label class="control-label" ></label></div>
                             <ul class="nav navbar-nav"></ul>
                         </form>
-                        <p class="navbar-text navbar-right"> <a class="btn btn-default action-button" role="button" href="#">Log out</a></p>
+                        <p class="navbar-text navbar-right"> <a class="btn btn-default action-button" role="button"  href="/logOff">Log out</a></p>
                 </div>
         </div>
         </nav>
