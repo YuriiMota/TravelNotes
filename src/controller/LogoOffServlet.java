@@ -16,7 +16,7 @@ public class LogoOffServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
-        if (httpSession!=null){
+        if (httpSession != null) {
             httpSession.invalidate();
         }
         response.sendRedirect("/login");

@@ -77,7 +77,7 @@ public class EditServlet extends HttpServlet {
                 places.setTitle(title);
                 places.setDescription(description);
                 places.setCountry(country);
-                if (image!=null){
+                if (image != null) {
                     places.setImage(image);
                 }
                 System.out.println(places);

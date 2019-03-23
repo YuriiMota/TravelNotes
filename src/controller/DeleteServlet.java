@@ -27,7 +27,7 @@ public class DeleteServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
-        if(httpSession.getAttribute("id")==null){
+        if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");
         }
     }

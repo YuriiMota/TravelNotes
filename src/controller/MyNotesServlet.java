@@ -22,15 +22,16 @@ import java.util.List;
 @WebServlet("/mynotes")
 public class MyNotesServlet extends HttpServlet {
     HttpSession httpSession;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         httpSession = request.getSession();
-        if(httpSession.getAttribute("id")==null){
+        if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");
-        }else {
+        } else {
             PlaceDAO placeDAO = new PlaceService();
             UserDAO userDAO = new UserService();
             List<Place> places;
@@ -39,8 +40,6 @@ public class MyNotesServlet extends HttpServlet {
             Account account = (Account) httpSession.getAttribute("id");
             places = placeDAO.getAll(account.getId());
             request.setAttribute("places", places);
-
-
             User user = userDAO.getById(account.getId());
             request.setAttribute("userName", user);
             getServletContext().getRequestDispatcher("/mynotes.jsp").forward(request, response);

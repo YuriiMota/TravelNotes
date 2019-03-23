@@ -99,6 +99,7 @@ public class CreateNoteServlet extends HttpServlet {
         httpSession = request.getSession();
         if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");
+
         } else {
             getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
         }
@@ -108,15 +109,15 @@ public class CreateNoteServlet extends HttpServlet {
         File uploadFile = null;
         String way = null;
 
-        if(!item.getName().isEmpty()){
-        do {
-            way = UPLOAD_DIRECTORY +"img"+ new Random().nextInt() + item.getName();
-            String path = getServletContext().getRealPath(way);
-            System.out.println(path);
-            uploadFile = new File(path);
-        } while (uploadFile.exists());
-        item.write(uploadFile);}
-        else way="resources/image/no-photo-available.jpg";
+        if (!item.getName().isEmpty()) {
+            do {
+                way = UPLOAD_DIRECTORY + "img" + new Random().nextInt() + item.getName();
+                String path = getServletContext().getRealPath(way);
+                System.out.println(path);
+                uploadFile = new File(path);
+            } while (uploadFile.exists());
+            item.write(uploadFile);
+        } else way = "resources/image/no-photo-available.jpg";
         return way;
     }
 }

@@ -20,13 +20,13 @@ public class PlaceService implements PlaceDAO {
             try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
                 preparedStatement.setInt(1, fId);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                while(resultSet.next()) {
+                while (resultSet.next()) {
                     int placeId = resultSet.getInt(1);
                     String title = resultSet.getString(2);
                     String country = resultSet.getString(3);
                     String description = resultSet.getString(4);
                     String image = resultSet.getString(5);
-                    Place place = new Place(placeId,title,country,description,image);
+                    Place place = new Place(placeId, title, country, description, image);
                     places.add(place);
                 }
             }
@@ -69,7 +69,7 @@ public class PlaceService implements PlaceDAO {
                 preparedStatement.setString(1, place.getTitle());
                 preparedStatement.setString(2, place.getCountry());
                 preparedStatement.setString(3, place.getDescription());
-                if(place.getImage().isEmpty()){
+                if (place.getImage().isEmpty()) {
                     place.setImage("resources/image/no-photo-available.jpg");
                 }
                 preparedStatement.setString(4, place.getImage());

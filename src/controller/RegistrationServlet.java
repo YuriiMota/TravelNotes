@@ -20,7 +20,7 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     private AccountDAO accountDAO = new AccountService();
     private UserDAO userDAO = new UserService();
-    private static final int MAX_PASSS_LENGTH = 9;
+    private static final int MAX_PASSS_LENGTH = 7;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

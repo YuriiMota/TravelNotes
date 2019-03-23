@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("email");
             String psw = request.getParameter("password");
 
-            psw=md5Apache.encryptText(psw);
+            psw = md5Apache.encryptText(psw);
             if (registeredLogin(email, psw)) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("id", accountDAO.getByLogin(email, psw));

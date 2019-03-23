@@ -56,7 +56,7 @@ public class UserService implements UserDAO {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, user.getFirstName());
                 preparedStatement.setString(2, user.getLastName());
-                preparedStatement.setInt(3,id);
+                preparedStatement.setInt(3, id);
                 return preparedStatement.executeUpdate();
             }
         } catch (SQLException ex) {
@@ -68,15 +68,15 @@ public class UserService implements UserDAO {
     @Override
     public int update(User user) {
         String sql = "UPDATE users SET firstname=?, lastname=? WHERE id =?";
-        try(Connection connection = ConnectionDB.getConnection()){
-            try(PreparedStatement preparedStatement=connection.prepareStatement(sql)){
-                preparedStatement.setString(1,user.getFirstName());
-                preparedStatement.setString(2,user.getLastName());
-                preparedStatement.setInt(3,user.getId());
+        try (Connection connection = ConnectionDB.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, user.getFirstName());
+                preparedStatement.setString(2, user.getLastName());
+                preparedStatement.setInt(3, user.getId());
 
                 return preparedStatement.executeUpdate();
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return 0;
