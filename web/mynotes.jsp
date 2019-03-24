@@ -43,8 +43,7 @@
                 <ul class="nav navbar-nav">
 
                     <li role="presentation"><a href="/create.jsp"
-                                               style="font-size: 18px;font-family: Bitter, serif;color: rgb(52,64,74);">Add
-                        new Story</a></li>
+                                               style="font-size: 18px;font-family: Bitter, serif;color: rgb(52,64,74);">Add new Story</a></li>
                 </ul>
                 <p class="navbar-text navbar-right actions"><a class="btn btn-default action-button" role="button"
                                                                href="/logOff">Log out</a></p>
@@ -59,7 +58,6 @@
             <div class="col-sm-12">
                 <c:forEach var="place" items="${places}">
                     <div class="col-sm-6 item">
-
                         <div class="row">
 
                             <div class="col-md-5"><a href="<c:url value="/view?id=${place.getId()}" />">
@@ -71,17 +69,11 @@
                                 <p class="description"><c:out value="${fn:substring(place.getDescription(),0,170)}"/><a
                                         href="<c:url value="/view?id=${place.getId()}" />">...read more</a></p>
                             </div>
-
                         </div>
-
                     </div>
-
                 </c:forEach>
-
             </div>
         </div>
-
-
     </div>
 </div>
 

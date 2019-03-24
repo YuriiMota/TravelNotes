@@ -8,7 +8,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import service.PlaceService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import static controller.UploadPicServlet.MEMORY_THRESHOLD;
-
 @WebServlet("/edit")
 @MultipartConfig
 public class EditServlet extends HttpServlet {
+    public static final int MEMORY_THRESHOLD = 1024 * 1024 * 10; //10MB
     private final static String UPLOAD_DIRECTORY = ("/resources/image/");
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +37,6 @@ public class EditServlet extends HttpServlet {
             String description = null;
             String image = null;
             if (!ServletFileUpload.isMultipartContent(request)) {
-
                 return;
             }
             FileItemFactory itemfactory = new DiskFileItemFactory();
@@ -68,7 +64,6 @@ public class EditServlet extends HttpServlet {
                         }
                     }
                 }
-
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
@@ -92,8 +87,6 @@ public class EditServlet extends HttpServlet {
             ex.printStackTrace();
             getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
         }
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,7 +97,6 @@ public class EditServlet extends HttpServlet {
             PlaceDAO placeDAO = new PlaceService();
             Place places = placeDAO.getById(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("place", places);
-
             getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
         }
     }
@@ -112,9 +104,6 @@ public class EditServlet extends HttpServlet {
     private String processUploadedFile(FileItem item) throws Exception {
         File uploadFile = null;
         String way = null;
-        //выбираем файлу имя пока не найдём свободное
-        System.out.println("Name=" + item.getName());
-
         do {
             way = UPLOAD_DIRECTORY + "img" + new Random().nextInt() + item.getName();
             System.out.println(way);

@@ -25,17 +25,12 @@ public class EditNameServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             String firstName = request.getParameter("fname");
             String lastName = request.getParameter("lname");
-
             user = new User(id, firstName, lastName);
-
             userDAO.update(user);
             response.sendRedirect(request.getContextPath() + "/mynotes");
-
         } catch (Exception ex) {
-
             getServletContext().getRequestDispatcher("/editname.jsp").forward(request, response);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +43,6 @@ public class EditNameServlet extends HttpServlet {
             httpSession = request.getSession();
             Account account = (Account) httpSession.getAttribute("id");
             user = userDAO.getById(account.getId());
-
             request.setAttribute("user", user);
             getServletContext().getRequestDispatcher("/editname.jsp").forward(request, response);
         }

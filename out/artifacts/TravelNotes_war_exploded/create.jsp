@@ -19,22 +19,7 @@
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
     <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
-    <%--    <script src="jquery-1.8.2.js"></script>
-        <script src="jquery.ajaxfileupload.js"></script>
-        <script language="Javascript">
-            $(document).ready(function(){
-                $('input[type="file"]').ajaxfileupload({
-                    'action': 'create',
-                    'onComplete': function(response) {
-                        $('#upload').hide();
-                        alert("File SAVED!!");
-                    },
-                    'onStart': function() {
-                        $('#upload').show();
-                    }
-                });
-            });
-        </script>--%>
+
 </head>
 
 <body style="height: 673px;background-image: url(assets/img/fog-foggy-forest-4765.jpg);">
@@ -46,14 +31,14 @@
         <input type="hidden" name="id">
         <h1 style="font-size: 37px;color: white;font-family: Bitter, serif;">Create Your Story</h1>
         <h1 style="color: rgb(228,228,228);font-family: Bitter, serif;font-size: 15px;">Title</h1><input name="title"
-                                                                                                         type="text"
-                                                                                                         style="height: 36px;width: 531px;color: rgb(0,0,0);opacity: 0.71;">
+         type="text"
+         style="height: 36px;width: 531px;color: rgb(0,0,0);opacity: 0.71;">
         <header></header>
         <input type="hidden" name="image" value="${uploadImage}">
         <h1 style="font-size: 14px;color: rgb(255,255,255);">Country</h1><input name="country" type="text"
-                                                                                style="height: 36px;width: 531px;color: rgb(0,0,0);opacity: 0.75;">
+         style="height: 36px;width: 531px;color: rgb(0,0,0);opacity: 0.75;">
         <h1 style="font-size: 14px;color: rgb(231,231,231);">Description</h1><textarea name="description"
-                                                                                       style="color: rgb(17,16,16);width: 835px;height: 182px;opacity: 0.82;"></textarea>
+         style="color: rgb(17,16,16);width: 835px;height: 182px;opacity: 0.82;"></textarea>
         <input type="file" name="file"/>
         <div class="container" style="padding: 10px;">
             <button class="btn btn-default" type="Submit" value="Submit"
@@ -67,18 +52,7 @@
             </button>
         </div>
     </form>
-    <%-- <form action="/upload" method="post" enctype="multipart/form-data">
-         <input type="file" name="image"/>${message}
-         <input class="btn btn-default" type="submit" value="upload"  />
-     </form>--%>
-    <%--        <div class="centered">
 
-                <input type="file" name="datafile" /><br/>
-                <div id="upload" style="display:none;">Uploading..</div>
-            </div>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        </div>--%>
 
 </body>
 

@@ -48,13 +48,13 @@
                         <input type="hidden" value="${user.getId()}" name="id">
                         <h1 class="text-center">Edit Name</h1>
                         <h1 style="margin: 24px;height: 42px;width: 736px;">First Name</h1><input type="text"
-                                                                                                  value="${user.getFirstName()}"
-                                                                                                  name="fname"
-                                                                                                  style="width: 239px;height: 37px;margin: -1px;">
-                        <h1 style="margin: 14px;height: 42px;width: 736px;">Last Name</h1><input type="text"
-                                                                                                 value="${user.getLastName()}"
-                                                                                                 name="lname"
-                                                                                                 style="width: 239px;height: 37px;padding: 0px;">
+                        value="${user.getFirstName()}"
+                        name="fname" style="width: 239px;height: 37px;margin: -1px;">
+                        <h1 style="margin: 14px;height: 42px;width: 736px;">Last Name</h1>
+                        <input type="text"
+                         value="${user.getLastName()}"
+                         name="lname"
+                         style="width: 239px;height: 37px;padding: 0px;">
                         <button class="btn btn-default" type="Submit"
                                 style="margin: 24px;height: 37px;width: 69px;background-color: rgb(4,179,0);color: rgb(234,234,234);">
                             Save

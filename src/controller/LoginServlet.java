@@ -17,12 +17,13 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     private AccountDAO accountDAO = new AccountService();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Md5Apache md5Apache = new Md5Apache();
         try {
             String email = request.getParameter("email");
             String psw = request.getParameter("password");
-
             psw = md5Apache.encryptText(psw);
             if (registeredLogin(email, psw)) {
                 HttpSession httpSession = request.getSession();
@@ -35,7 +36,6 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     private boolean registeredLogin(String login, String password) {
@@ -47,9 +47,9 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");
         requestDispatcher.forward(request, response);
-
     }
 }

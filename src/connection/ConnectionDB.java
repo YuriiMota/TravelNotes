@@ -11,14 +11,15 @@ import java.util.Properties;
 
 public class ConnectionDB {
     public static Connection getConnection() throws SQLException {
-
         Properties props = new Properties();
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.getStackTrace();
         }
-        try (InputStream in = Files.newInputStream(Paths.get("E:\\SoftServe\\Homework\\TravelNotes\\database.properties"))) {
+        try (InputStream in = Files.newInputStream(Paths
+                .get("E:\\SoftServe\\Homework\\TravelNotes\\database.properties"))) {
             props.load(in);
         } catch (IOException e) {
             System.out.println("Configuration database file not found");

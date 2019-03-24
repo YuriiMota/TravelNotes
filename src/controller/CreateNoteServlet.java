@@ -13,19 +13,20 @@ import service.PlaceService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import static controller.UploadPicServlet.MEMORY_THRESHOLD;
-
 @WebServlet("/create")
 @MultipartConfig
 public class CreateNoteServlet extends HttpServlet {
+    public static final int MEMORY_THRESHOLD = 1024 * 1024 * 10; //10MB
     private final static String UPLOAD_DIRECTORY = ("/resources/image/");
     HttpSession httpSession;
 
@@ -38,12 +39,11 @@ public class CreateNoteServlet extends HttpServlet {
             String description = null;
             String image = null;
             if (!ServletFileUpload.isMultipartContent(request)) {
-
                 return;
             }
-            FileItemFactory itemfactory = new DiskFileItemFactory();
-            ((DiskFileItemFactory) itemfactory).setSizeThreshold(MEMORY_THRESHOLD);
-            ServletFileUpload upload = new ServletFileUpload(itemfactory);
+            FileItemFactory itemFactoryactory = new DiskFileItemFactory();
+            ((DiskFileItemFactory) itemFactoryactory).setSizeThreshold(MEMORY_THRESHOLD);
+            ServletFileUpload upload = new ServletFileUpload(itemFactoryactory);
 
             try {
                 List<FileItem> items = upload.parseRequest(request);
@@ -51,7 +51,6 @@ public class CreateNoteServlet extends HttpServlet {
                 while (iter.hasNext()) {
                     FileItem item = (FileItem) iter.next();
                     if (item.isFormField()) {
-
                         if (item.getFieldName().equals("title")) {
                             title = item.getString();
                         } else if (item.getFieldName().equals("country")) {
@@ -62,44 +61,26 @@ public class CreateNoteServlet extends HttpServlet {
                     } else {
                         image = processUploadedFile(item);
                     }
-
                 }
-                /*for (FileItem item : items) {
-                    File uploadDir = new File(getServletContext().getRealPath(UPLOAD_DIRECTORY));
-                    System.out.println(uploadDir);
-                    File file = File.createTempFile("img", ".jpg", uploadDir);
-                    item.write(file);
-                    String fileName = file.getName();
-                    filePath = UPLOAD_DIRECTORY + fileName;
-                    System.out.println(fileName);
-                    System.out.println(filePath);
-
-                }*/
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
 
             httpSession = request.getSession();
             Account account = (Account) httpSession.getAttribute("id");
-
-            System.out.println(new Place(title, country, description, image));
             placeDAO.insert(new Place(title, country, description, image), account.getId());
-            //}
             Thread.sleep(5000);
             response.sendRedirect(request.getContextPath() + "/mynotes");
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            // getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         httpSession = request.getSession();
         if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");
-
         } else {
             getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
         }
@@ -113,7 +94,6 @@ public class CreateNoteServlet extends HttpServlet {
             do {
                 way = UPLOAD_DIRECTORY + "img" + new Random().nextInt() + item.getName();
                 String path = getServletContext().getRealPath(way);
-                System.out.println(path);
                 uploadFile = new File(path);
             } while (uploadFile.exists());
             item.write(uploadFile);

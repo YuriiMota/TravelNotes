@@ -18,18 +18,19 @@ import java.io.IOException;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
+    private static final int MAX_PASS_LENGTH = 7;
     private AccountDAO accountDAO = new AccountService();
     private UserDAO userDAO = new UserService();
-    private static final int MAX_PASSS_LENGTH = 7;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.html");
         requestDispatcher.forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         Md5Apache md5Apache = new Md5Apache();
         try {
             String email = req.getParameter("email");
@@ -52,7 +53,6 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
-
     private boolean availableLogin(String login) {
         boolean isAvailable = false;
         if (accountDAO.getByLogin(login) == null) {
@@ -64,10 +64,8 @@ public class RegistrationServlet extends HttpServlet {
 
     private boolean checkValidations(String email, String password) {
         boolean iSValid = false;
-        if ((email.length() < MAX_PASSS_LENGTH) && (password.length() < MAX_PASSS_LENGTH)) ;
-        {
+        if ((email.length() > MAX_PASS_LENGTH) && (password.length() > MAX_PASS_LENGTH)) {
             iSValid = true;
-
         }
         return iSValid;
     }

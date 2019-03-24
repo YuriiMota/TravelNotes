@@ -52,7 +52,6 @@ public class AccountService implements AccountDAO {
         return account;
     }
 
-
     @Override
     public int insert(Account account) {
 
