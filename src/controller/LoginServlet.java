@@ -48,7 +48,8 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");
         requestDispatcher.forward(request, response);
     }

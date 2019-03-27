@@ -17,7 +17,8 @@ import java.io.IOException;
 public class EditNameServlet extends HttpServlet {
     HttpSession httpSession;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         UserDAO userDAO = new UserService();
         User user;
 
@@ -33,7 +34,8 @@ public class EditNameServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         httpSession = request.getSession();
         if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");

@@ -36,11 +36,12 @@ public class RegistrationServlet extends HttpServlet {
             String email = req.getParameter("email");
             String psw = req.getParameter("password");
             if (checkValidations(email, psw)) {
-                psw = md5Apache.encryptText(psw);
                 if (availableLogin(email)) {
+                    psw = md5Apache.encryptText(psw);
                     Account account = new Account(email, psw);
                     accountDAO.insert(account);
-                    userDAO.insert(new User("Unknown", "Person"), accountDAO.getByLogin(email).getId());
+                    userDAO.insert(new User("Unknown", "Person"),
+                            accountDAO.getByLogin(email).getId());
                     resp.sendRedirect(req.getContextPath() + "/login");
                 } else {
                     resp.sendRedirect(req.getContextPath() + "/registration");
@@ -64,7 +65,8 @@ public class RegistrationServlet extends HttpServlet {
 
     private boolean checkValidations(String email, String password) {
         boolean iSValid = false;
-        if ((email.length() > MAX_PASS_LENGTH) && (password.length() > MAX_PASS_LENGTH)) {
+        if ((email.length() > MAX_PASS_LENGTH)
+                && (password.length() > MAX_PASS_LENGTH)) {
             iSValid = true;
         }
         return iSValid;

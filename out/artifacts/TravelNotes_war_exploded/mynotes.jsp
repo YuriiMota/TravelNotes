@@ -29,7 +29,7 @@
     <nav class="navbar navbar-default navigation-clean-button">
         <div class="container">
             <div class="navbar-header"><a class="navbar-brand"
-                                          href='<c:url value="/editname?id=${userName.getId()}" />'>
+             href='<c:url value="/editname?id=${userName.getId()}" />'>
                 <p>
                     <c:out value="${userName.getFirstName()} "></c:out>
                     <c:out value="${userName.getLastName()}"></c:out>
@@ -43,10 +43,10 @@
                 <ul class="nav navbar-nav">
 
                     <li role="presentation"><a href="/create.jsp"
-                                               style="font-size: 18px;font-family: Bitter, serif;color: rgb(52,64,74);">Add new Story</a></li>
+                    style="font-size: 18px;font-family: Bitter, serif;color: rgb(52,64,74);">Add new Story</a></li>
                 </ul>
                 <p class="navbar-text navbar-right actions"><a class="btn btn-default action-button" role="button"
-                                                               href="/logOff">Log out</a></p>
+                 href="/logOff">Log out</a></p>
             </div>
         </div>
     </nav>

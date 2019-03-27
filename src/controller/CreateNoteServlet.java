@@ -30,7 +30,8 @@ public class CreateNoteServlet extends HttpServlet {
     private final static String UPLOAD_DIRECTORY = ("/resources/image/");
     HttpSession httpSession;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         PlaceDAO placeDAO = new PlaceService();
 
         try {
@@ -41,9 +42,9 @@ public class CreateNoteServlet extends HttpServlet {
             if (!ServletFileUpload.isMultipartContent(request)) {
                 return;
             }
-            FileItemFactory itemFactoryactory = new DiskFileItemFactory();
-            ((DiskFileItemFactory) itemFactoryactory).setSizeThreshold(MEMORY_THRESHOLD);
-            ServletFileUpload upload = new ServletFileUpload(itemFactoryactory);
+            FileItemFactory itemFactory = new DiskFileItemFactory();
+            ((DiskFileItemFactory) itemFactory).setSizeThreshold(MEMORY_THRESHOLD);
+            ServletFileUpload upload = new ServletFileUpload(itemFactory);
 
             try {
                 List<FileItem> items = upload.parseRequest(request);
@@ -77,7 +78,8 @@ public class CreateNoteServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         httpSession = request.getSession();
         if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");
@@ -97,7 +99,9 @@ public class CreateNoteServlet extends HttpServlet {
                 uploadFile = new File(path);
             } while (uploadFile.exists());
             item.write(uploadFile);
-        } else way = "resources/image/no-photo-available.jpg";
+        } else {
+            way = "resources/image/no-photo-available.jpg";
+        }
         return way;
     }
 }

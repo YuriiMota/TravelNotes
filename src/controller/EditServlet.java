@@ -27,7 +27,8 @@ public class EditServlet extends HttpServlet {
     public static final int MEMORY_THRESHOLD = 1024 * 1024 * 10; //10MB
     private final static String UPLOAD_DIRECTORY = ("/resources/image/");
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Place places;
         PlaceDAO placeDAO = new PlaceService();
         try {
@@ -85,11 +86,13 @@ public class EditServlet extends HttpServlet {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/edit.jsp")
+                    .forward(request, response);
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         if (httpSession.getAttribute("id") == null) {
             response.sendRedirect("/login");
@@ -97,7 +100,8 @@ public class EditServlet extends HttpServlet {
             PlaceDAO placeDAO = new PlaceService();
             Place places = placeDAO.getById(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("place", places);
-            getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/edit.jsp")
+                    .forward(request, response);
         }
     }
 

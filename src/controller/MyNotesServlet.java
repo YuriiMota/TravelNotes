@@ -42,7 +42,8 @@ public class MyNotesServlet extends HttpServlet {
             request.setAttribute("places", places);
             User user = userDAO.getById(account.getId());
             request.setAttribute("userName", user);
-            getServletContext().getRequestDispatcher("/mynotes.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/mynotes.jsp")
+                    .forward(request, response);
         }
     }
 }
