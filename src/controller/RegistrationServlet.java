@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-    private static final int MAX_PASS_LENGTH = 7;
+    private static final int MAX_PASS_LENGTH = 3;
     private AccountDAO accountDAO = new AccountService();
     private UserDAO userDAO = new UserService();
 

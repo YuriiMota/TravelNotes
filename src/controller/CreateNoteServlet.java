@@ -27,7 +27,8 @@ import java.util.Random;
 @MultipartConfig
 public class CreateNoteServlet extends HttpServlet {
     public static final int MEMORY_THRESHOLD = 1024 * 1024 * 10; //10MB
-    private final static String UPLOAD_DIRECTORY = ("/resources/image/");
+    private final static String UPLOAD_DIRECTORY = "/resources/image/";
+    private final static String DEFAULT_PICTURE = "resources/image/no-photo-available.jpg";
     HttpSession httpSession;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -100,7 +101,7 @@ public class CreateNoteServlet extends HttpServlet {
             } while (uploadFile.exists());
             item.write(uploadFile);
         } else {
-            way = "resources/image/no-photo-available.jpg";
+            way = DEFAULT_PICTURE;
         }
         return way;
     }
